@@ -2,6 +2,10 @@
 /*	1985-86				*/
 /*	Joshua Kosman			*/
 /*	David Neel Smith		*/
+
+#ifndef _GREEK_H_
+#define _GREEK_H_
+
 #define ANSI 1
 /*
 #define LIGHTSPEED 1
@@ -275,13 +279,8 @@ typedef struct {
 #define	MASCULINE	01
 #define	FEMININE	02
 #define	NEUTER		04
-#define	ADVERBIAL		010 /* NB!! */
+#define	ADVERBIAL	010
 #define	COMMON_GNDR	MASCULINE|FEMININE|NEUTER
-/*
-#define	COMMON_GNDR	4
-*/
-/*
-#define	ADVERB		5 /* NB!! */
 
 /* values for degree field */
 #define NDEGREES	3
@@ -613,3 +612,5 @@ ext_type calc_vbext(),calc_adjext(),findhyp();
 /* addaccent.c */
 int addaccent(char *, int, char *);
 int cinsert(int, char *);
+
+#endif /* _GREEK_H_ */

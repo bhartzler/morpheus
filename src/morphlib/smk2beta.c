@@ -95,7 +95,7 @@ return(0);
 			s++;
 			continue;
 		}
-		if( *s == '«' && ! fromsmk ) {
+		if( *s == '\253' && ! fromsmk ) {
 			set_cur_font(ROMAN,result);
 			s++;
 			continue;

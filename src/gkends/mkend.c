@@ -177,9 +177,9 @@ static
 /*
 	if( Is_penult_accent(morphflags_of(Have)) ) {
 		if( saw_vowel) {
-/*
+
 printf("saw_vowel on [%s]\n", gkstring_of(Have) );
-*
+
 			zap_morphflag(morphflags_of(Have),STEM_ACC);
 			add_morphflag(morphflags_of(Have),SUFF_ACC);
 		}

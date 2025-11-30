@@ -322,9 +322,9 @@ printf("str [%s] skipdial %o match d [%o]\n", curstring, skipdial, dialect_of(ma
 					AccComposForm(gstr);
 				zap_morphflag(morphflags_of(gstr),LOST_ACC);
 			}
- /* commented this out*
+ /* commented this out
 				if( Is_verbform(gstr) && (mood_of(forminfo_of(gstr)) != PARTICIPLE))
- /* 5/9/92:  we were *not*, in fact, generating endings such as "ou=sai" but were
+    5/9/92:  we were *not*, in fact, generating endings such as "ou=sai" but were
  * getting "ou/sai" instead.
  *
 				FixRecAcc(gstr,morphflags_of(gstr),gkstring_of(gstr));

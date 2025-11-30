@@ -44,7 +44,8 @@ GenDictEntry(Gkword,dentry)
 	gkforms = GenStemForms(&TmpGkword,keys,0);
 	if( ! gkforms ) return(0);
 
-	for(formcnt=0;workword_of((gkforms+formcnt))[0];formcnt++) ;
+	for(formcnt=0;workword_of((gkforms+formcnt))[0];formcnt++)
+		;
 
         qsort(gkforms,formcnt,sizeof * gkforms,CompGkForms);	
 
@@ -374,7 +375,7 @@ gk_word *
 /*
  * check for blank line 
  */
-		while(isspace(*s)) *s++;
+		while(isspace(*s)) s++;
 		if( ! *s ) return(0);
 		
 	}

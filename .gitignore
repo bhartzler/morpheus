@@ -28,6 +28,8 @@ src/gkends/indendtables
 stemlib/Latin/conjfile
 stemlib/Latin/conjfile.short
 stemlib/Latin/oddfile
+stemlib/Latin/nommorph
+stemlib/Latin/vbmorph
 stemlib/Latin/derivs/ascii
 stemlib/Latin/derivs/indices
 stemlib/Latin/endtables/ascii
@@ -36,6 +38,9 @@ stemlib/Latin/steminds/
 stemlib/Latin/stemsrc/nom.irreg
 stemlib/Latin/stemsrc/vbs.irreg
 stemlib/Greek/conjfile
+stemlib/Greek/oddfile
+stemlib/Greek/nommorph
+stemlib/Greek/vbmorph
 stemlib/Greek/derivs/ascii
 stemlib/Greek/derivs/indices
 stemlib/Greek/endtables/ascii

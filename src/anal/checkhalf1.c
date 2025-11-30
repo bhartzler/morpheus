@@ -202,7 +202,7 @@ StemsWork(gk_word *Gkword, gk_string *poss_stems[], char *poss_keys[], int stem_
 fprintf(stderr,"stem_num [%d]\n", stem_num );
 */
 	for(i=0;i<stem_num;i++) {
-		if( rval=StemWorks(Gkword,poss_keys[i],poss_stems[i]))
+		if( (rval=StemWorks(Gkword,poss_keys[i],poss_stems[i])))
 			result += rval;
 	}
 	if( ! result )

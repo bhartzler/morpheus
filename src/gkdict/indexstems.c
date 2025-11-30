@@ -105,7 +105,7 @@ index_stems(int wantstem, int wantirrverb, int wantindecl, char *wlist, char *in
 */	
 	stems = (char **) calloc((size_t)MAX_END_TABLE,(size_t)sizeof *stems);
 	if( ! stems ) {
-		fprintf(stderr,"could not allocate %ld stems\n", MAX_END_TABLE );
+		fprintf(stderr,"could not allocate %ld stems\n", (long)MAX_END_TABLE );
 		exit(-1);
 	}
 
@@ -170,8 +170,9 @@ index_stems(int wantstem, int wantirrverb, int wantindecl, char *wlist, char *in
 				while(isspace(*t)) t++;
 				while(*t&&!isspace(*t)) t++;
 				*t = 0;
-			} else
-				basename[0];
+			} else {
+				/* no action */
+			}
 			nextkey(line+4,curstem);
  			if( ! do_curstem(tag,curstem,curlemma,line+4,"") )
  				break;

@@ -385,7 +385,7 @@ DumpPerseusAnalysis(
   fprintf(fout,"%s ", lemma_of(anal) );
 
   if (prntflags & ENDING_INDEX) {
-    fprintf(fout,"\t%d</NL>",forminfo_of(anal));
+    fprintf(fout,"\t%d</NL>",*(int*)&forminfo_of(anal));
   }
   else {
     GregSprintGkFlags(anal,tmp," "," ",1);
