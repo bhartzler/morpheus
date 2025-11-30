@@ -98,5 +98,5 @@ nt: latnom splitlems
 clean:
 	rm -f steminds/* derivs/ascii/* derivs/indices/* derivs/out/*
 	rm -f endtables/ascii/* endtables/indices/* endtables/out/*
-	rm -f stemsrc/nom.irreg stemsrc/vbs.irreg conjfile*
+	rm -f stemsrc/nom.irreg stemsrc/vbs.irreg conjfile* oddfile
 	rm -f nommorph nom.heads vbmorph skip.ia ia.noms ia.base ia.failed ls.morph ls.vbs ls.cvbs.words ls.cvbs.morph lat nt

@@ -83,7 +83,7 @@ lsj.morph:	${LSJDIR}/lemmata
 
 
 clean:
-	rm -f $(STEMPROG) conjfile
+	rm -f $(STEMPROG) conjfile oddfile
 	rm -f steminds/* derivs/ascii/* derivs/indices/* derivs/out/*
 	rm -f endtables/ascii/* endtables/indices/* endtables/out/*
 	rm -f nommorph nom.heads vbmorph skip.ia ia.noms ia.base ia.failed lsj.morph lsj.vbs
