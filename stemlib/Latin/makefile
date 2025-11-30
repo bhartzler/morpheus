@@ -1,6 +1,6 @@
 LSDIR=/local/text/ls
 
-all: ends noms vbs deriv
+all: ends deriv noms vbs
 
 ends: nends vends
 
@@ -13,12 +13,13 @@ vends:
 	indendtables -L verb
 
 compnoms:
-	cat stemsrc/nom.* stemsrc/nom[0-9]* > /tmp/nommorph
-	indexcomps < /tmp/nommorph | sort | compcomps > /tmp/nom.heads
+	cat stemsrc/nom.* stemsrc/nom[0-9]* > nommorph
+	indexcomps < nommorph | sort | compcomps > nom.heads
 
 deriv:
 	mkdir -p derivs/ascii derivs/indices derivs/out
 	buildderiv -L all
+	touch derivs/out/perfstem.out  # stub: do_conj expects this but perfstem needs no derivation
 	indderivtables -L
 
 noms:	stemsrc/nom.irreg stemind/nomind 
@@ -26,7 +27,7 @@ noms:	stemsrc/nom.irreg stemind/nomind
 vbs:	stemsrc/vbs.irreg stemind/vbind
 
 VBFILES=stemsrc/vbs.latin.bas stemsrc/vbs.latin.irreg stemsrc/vbs.latin \
-	stemsrc/vbs.irreg stemsrc/vbs.mpi
+	stemsrc/vbs.irreg
 
 stemind/vbind:	stemsrc/vbs.latin
 	mkdir -p steminds
@@ -34,7 +35,7 @@ stemind/vbind:	stemsrc/vbs.latin
 	    perl -pe 's/([a-z])([aei])_v[ \t]+perfstem/$$1\t$$2vperf/g;' > \
 	    conjfile
 	do_conj -L
-	mv conjfile.short /tmp/vbmorph
+	mv conjfile.short vbmorph
 	indexvbs -L
 
 stemsrc/nom.irreg: stemsrc/irreg.nom.src
@@ -50,18 +51,18 @@ stemsrc/lemlist:
 
 stemind/nomind:	stemsrc/ls.nom ../Greek/getentities.pl
 	mkdir -p steminds
-	cat stemsrc/nom.* stemsrc/ls.nom > /tmp/nommorph
-	../Greek/getentities.pl /tmp/nommorph  > steminds/entitylist.txt
+	cat stemsrc/nom.* stemsrc/ls.nom > nommorph
+	../Greek/getentities.pl nommorph  > steminds/entitylist.txt
 	indexnoms -L
 
 ia.noms:
-	echo "[aehuwo]i h_hs" > /tmp/skip.ia
-	echo ":wd:" >> /tmp/skip.ia
+	echo "[aehuwo]i h_hs" > skip.ia
+	echo ":wd:" >> skip.ia
 	cat stemsrc/nom0[1-6] | fgrep "i h_hs" | \
-	    egrep -v -f /tmp/skip.ia > /tmp/ia.noms
-	findbase < /tmp/ia.noms > /tmp/ia.base
-	fgrep 0 /tmp/ia.base | awk '{print $$1}' | rev | sort -d | \
-	    rev > /tmp/ia.failed
+	    egrep -v -f skip.ia > ia.noms
+	findbase < ia.noms > ia.base
+	fgrep 0 ia.base | awk '{print $$1}' | rev | sort -d | \
+	    rev > ia.failed
 
 # these files are now stable
 #stemsrc/ls.nom stemsrc/vbs.latin:
@@ -78,19 +79,24 @@ ls.morph:	${LSDIR}/lemmata
 	cat ${LSDIR}/lemmata |  combitype | splitlat | conj1 | \
 	    fgrep -f vtags | latvb > ls.vbs
 	splitlems < ${LSDIR}/lemmata |  fixhesc | fgrep -v -f vtags | \
-	    fgrep -v "<pos>P. a.</pos>" |  fixgend | latnom > /tmp/ls.morph
+	    fgrep -v "<pos>P. a.</pos>" |  fixgend | latnom > ls.morph
 	egrep -e "^:" ls.vbs > stemsrc/vbs.latin
-	fgrep -v "0:" /tmp/ls.morph > stemsrc/ls.nom
-	cp /tmp/ls.morph .
+	fgrep -v "0:" ls.morph > stemsrc/ls.nom
 
 simp.vbs:
 #	sed -e 's/\-//' ${LSDIR}/lemmata |  combitype | splitlat | conj1 | fgrep -f vtags | fgrep -f hyph -v | latvb > ls.simp.vbs
-#	sed -e 's/\-//' ${LSDIR}/lemmata |  combitype | splitlat | conj1 | fgrep -f vtags | fgrep -f hyph | latvb | filtcomp > /tmp/ls.cvbs.words
-	sed -e 's/\-//' ${LSDIR}/lemmata |  combitype | splitlat | awk '{print $$1}' > /tmp/ls.cvbs.words
+#	sed -e 's/\-//' ${LSDIR}/lemmata |  combitype | splitlat | conj1 | fgrep -f vtags | fgrep -f hyph | latvb | filtcomp > ls.cvbs.words
+	sed -e 's/\-//' ${LSDIR}/lemmata |  combitype | splitlat | awk '{print $$1}' > ls.cvbs.words
 	rm -f stemsrc/vbs.cmp.ml
-	cruncher -LV /tmp/ls.cvbs
-	cvblink < /tmp/ls.cvbs.morph | sort -u > stemsrc/vbs.cmp.ml
+	cruncher -LV ls.cvbs
+	cvblink < ls.cvbs.morph | sort -u > stemsrc/vbs.cmp.ml
 
-/tmp/nt: latnom splitlems
-	splitlems < /local/text/ls/lemmata | latnom > /tmp/lat
-	getitype < /tmp/lat | sort | uniq -c | sort -rn > /tmp/nt
+nt: latnom splitlems
+	splitlems < /local/text/ls/lemmata | latnom > lat
+	getitype < lat | sort | uniq -c | sort -rn > nt
+
+clean:
+	rm -f steminds/* derivs/ascii/* derivs/indices/* derivs/out/*
+	rm -f endtables/ascii/* endtables/indices/* endtables/out/*
+	rm -f stemsrc/nom.irreg stemsrc/vbs.irreg conjfile*
+	rm -f nommorph nom.heads vbmorph skip.ia ia.noms ia.base ia.failed ls.morph ls.vbs ls.cvbs.words ls.cvbs.morph lat nt

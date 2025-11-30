@@ -8,7 +8,7 @@ STEMPROG= stemsrc/stripref stemsrc/zapfirstf stemsrc/headnolen \
 # Get all noms files, but without emacs backups
 nomsrc= $(filter-out %~,$(wildcard stemsrc/nom.* stemsrc/nom[0-9]*))
 
-all: $(STEMPROG) ends noms vbs deriv 
+all: $(STEMPROG) ends deriv noms vbs 
 
 ends: nends vends
 
@@ -21,8 +21,8 @@ vends:
 	indendtables verb
 
 compnoms:
-	cat $(nomsrc) > /tmp/nommorph
-	indexcomps < /tmp/nommorph | sort | compcomps > /tmp/nom.heads
+	cat $(nomsrc) > nommorph
+	indexcomps < nommorph | sort | compcomps > nom.heads
 
 deriv:
 	buildderiv all
@@ -38,8 +38,8 @@ enclitics:
 stemind/vbind:
 	cat stemsrc/vbs.irreg stemsrc/vbs.simp.ml stemsrc/vbs.simp.02.new stemsrc/lsj.vbs \
 	    > conjfile
-	do_conj 
-	mv conjfile.short /tmp/vbmorph
+	do_conj
+	mv conjfile.short vbmorph
 	indexvbs
 
 stemsrc/nom.irreg:	stemsrc/irreg.nom.src
@@ -55,8 +55,8 @@ stemsrc/lemlist:
 
 stemind/nomind:	stemsrc/lsj.nom getentities.pl
 	./addconstraints.pl $(nomsrc) stemsrc/lsj.nom \
-	    stemsrc/lsj.byhand > /tmp/nommorph
-	./getentities.pl /tmp/nommorph  > steminds/entitylist.txt
+	    stemsrc/lsj.byhand > nommorph
+	./getentities.pl nommorph  > steminds/entitylist.txt
 	indexnoms
 
 entities: stemsrc/entitylist-byhand.txt
@@ -64,21 +64,26 @@ entities: stemsrc/entitylist-byhand.txt
 	
 
 ia.noms:
-	echo "[aehuwo]i h_hs" > /tmp/skip.ia
-	echo ":wd:" >> /tmp/skip.ia
+	echo "[aehuwo]i h_hs" > skip.ia
+	echo ":wd:" >> skip.ia
 	cat stemsrc/nom0[1-6] | fgrep "i h_hs" | \
-	    egrep -v -f /tmp/skip.ia > /tmp/ia.noms
-	findbase < /tmp/ia.noms > /tmp/ia.base
-	fgrep 0 /tmp/ia.base | awk '{print $$1}' | rev | sort -d | \
-	    rev > /tmp/ia.failed
+	    egrep -v -f skip.ia > ia.noms
+	findbase < ia.noms > ia.base
+	fgrep 0 ia.base | awk '{print $$1}' | rev | sort -d | \
+	    rev > ia.failed
 
 stemsrc/lsj.nom stemsrc/lsj.vbs:
 	[ -f ${LSJDIR}/lemmata ] && ${MAKE} lsj.morph
 
 lsj.morph:	${LSJDIR}/lemmata
 	sed -e 's/\-//' ${LSJDIR}/lemmata | setquant | splitlems | newlems | \
-	    fgrep -v "1 " | fgrep -v ": " | newlems2 > /tmp/lsj.morph
-	cp /tmp/lsj.vbs stemsrc
-	fgrep -v "0:" /tmp/lsj.morph > stemsrc/lsj.nom
-	cp /tmp/lsj.morph .
+	    fgrep -v "1 " | fgrep -v ": " | newlems2 > lsj.morph
+	cp lsj.vbs stemsrc
+	fgrep -v "0:" lsj.morph > stemsrc/lsj.nom
 
+
+clean:
+	rm -f $(STEMPROG) conjfile
+	rm -f steminds/* derivs/ascii/* derivs/indices/* derivs/out/*
+	rm -f endtables/ascii/* endtables/indices/* endtables/out/*
+	rm -f nommorph nom.heads vbmorph skip.ia ia.noms ia.base ia.failed lsj.morph lsj.vbs
