@@ -12,7 +12,7 @@
 %%
 
 #include <string.h>
-unsigned char curlemma[BUFSIZ];
+char curlemma[BUFSIZ];
 
 add_lemma()
 {
@@ -27,9 +27,9 @@ set_lemma()
 
 dump_orth()
 {
-	unsigned char * t;
+	char * t;
 	yytext[yyleng-7] = 0;
-	
+
 	t = yytext;
 	while(*t&&*t!='\t') putchar(*t++);
 	if(*t=='\t') putchar('\n');
@@ -38,4 +38,7 @@ dump_orth()
 	if(*t=='>') t++;
 	printf("%s\t", t );
 }
+
+int main(int argc, char **argv) { return yylex(); }
+int yywrap(void) { return 1; }
 

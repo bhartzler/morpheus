@@ -17,7 +17,7 @@ int sawpass = 0;
 
 char orthstem[BUFSIZ];
 
-unsigned char stem[BUFSIZ], lemma[BUFSIZ];
+char stem[BUFSIZ], lemma[BUFSIZ];
 
 char *spectypes[] = {
 "<itype>po^su^i, po^si^tum, 3</itype>",
@@ -183,7 +183,7 @@ is_spectype()
 
 set_lemma()
 {
-	unsigned char *t;
+	char *t;
 
 	ECHO;
 	sawi = sawpass = orthstem[0] = 0;
@@ -249,7 +249,7 @@ set_lemma()
 
 doderiv(char * tag)
 {
-	unsigned char *t;
+	char *t;
 	char addi[BUFSIZ], deptag[BUFSIZ];
 
 
@@ -270,8 +270,8 @@ doderiv(char * tag)
 
 set_orth()
 {
-	unsigned char * t = yytext + 6;
-	unsigned char * p = orthstem;
+	char * t = yytext + 6;
+	char * p = orthstem;
 	ECHO;
 
 	strcpy(orthstem,stem);
@@ -348,9 +348,9 @@ doverb(char * vtag)
 
 do_vstems(char * vtag, int trimn )
 {
-	unsigned char tmpstem[BUFSIZ], perfsuff[BUFSIZ] , supsuff[BUFSIZ];
-	unsigned char tmporths[BUFSIZ];
-	unsigned char * t;
+	char tmpstem[BUFSIZ], perfsuff[BUFSIZ] , supsuff[BUFSIZ];
+	char tmporths[BUFSIZ];
+	char * t;
 
 	doverb(vtag);
 
@@ -456,3 +456,6 @@ truncstem(char * workstem, int trimn)
 		}
 	}
 }
+
+int main(int argc, char **argv) { return yylex(); }
+int yywrap(void) { return 1; }

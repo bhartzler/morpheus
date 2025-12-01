@@ -47,11 +47,11 @@
 
 char orthstem[BUFSIZ];
 
-unsigned char stem[BUFSIZ], lemma[BUFSIZ];
+char stem[BUFSIZ], lemma[BUFSIZ];
 
 set_lemma()
 {
-	unsigned char *t;
+	char *t;
 
 	orthstem[0] = 0;
 	strcpy(lemma,yytext);
@@ -90,7 +90,7 @@ set_lemma()
 
 doderiv(char * tag,int trimn)
 {
-	unsigned char *t;
+	char *t;
 
 
 	if( orthstem[0] ) printf("\north: [%s] [%s]\n", stem, orthstem);
@@ -101,8 +101,8 @@ doderiv(char * tag,int trimn)
 
 set_orth()
 {
-	unsigned char * t = yytext + 6;
-	unsigned char * p = orthstem;
+	char * t = yytext + 6;
+	char * p = orthstem;
 	ECHO;
 
 	strcpy(orthstem,stem);
@@ -127,3 +127,6 @@ doverb(char * vtag, int trimn )
 	printf("\n:le:%s\n", lemma );
 	printf(":vs:%s\t%s\n", stem, vtag );
 }
+
+int main(int argc, char **argv) { return yylex(); }
+int yywrap(void) { return 1; }

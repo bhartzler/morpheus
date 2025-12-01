@@ -107,3 +107,6 @@ addquant(char *s, int c)
 	*s++ = c;
 	strcpy(s,tmp);
 }
+
+int main(int argc, char **argv) { return yylex(); }
+int yywrap(void) { return 1; }

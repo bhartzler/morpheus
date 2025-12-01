@@ -24,7 +24,7 @@ newentr2()
 
 newentr()
 {
-	unsigned char * t;
+	char * t;
 
 	t = yytext;
 
@@ -37,3 +37,6 @@ newentr()
 
 	while(*t&&*t!='<') putchar(*t++);
 }
+
+int main(int argc, char **argv) { return yylex(); }
+int yywrap(void) { return 1; }

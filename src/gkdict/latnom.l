@@ -18,10 +18,10 @@
 
 #include <string.h>
 #define MAXORTH 12
-unsigned char orthtab[MAXORTH][BUFSIZ];
+char orthtab[MAXORTH][BUFSIZ];
 
-unsigned char curlemma[BUFSIZ], curstem[BUFSIZ], stemnoacc[BUFSIZ], curitype[BUFSIZ];
-unsigned char curpat[BUFSIZ];
+char curlemma[BUFSIZ], curstem[BUFSIZ], stemnoacc[BUFSIZ], curitype[BUFSIZ];
+char curpat[BUFSIZ];
 int dumped_stem = 0;
 
 
@@ -59,7 +59,7 @@ set_lemma(char *p)
 
 set_orth(int tlen)
 {
-	unsigned char curpat[BUFSIZ], *s;
+	char curpat[BUFSIZ], *s;
 	
 	ECHO;
 	yytext[yyleng-tlen-3] = 0;
@@ -91,7 +91,7 @@ sameend(char *s1, char *s2)
 
 set_orthalt(int tlen)
 {
-	unsigned char curpat[BUFSIZ], *s;
+	char curpat[BUFSIZ], *s;
 	int rval;
 	int lastc;
 
@@ -163,7 +163,7 @@ dump_nom(int trimn,char * stype,char *glab,char * nlab)
 dump_ent(int trimn,char *etag,char * stype,char *glab,char * nlab)
 {
 
-	unsigned char * s;
+	char * s;
 	char tmp[BUFSIZ];
 	int i;
 	
@@ -362,7 +362,7 @@ if( is_itype("i^inis","men") ) return( dump_nom('m',"men_minis",gendlab,numlab))
 ECHO;
 }
 
-is_itype(unsigned char *s,unsigned char *ends)
+is_itype(char *s, char *ends)
 {
 	int n;
 
@@ -512,10 +512,10 @@ dump_form3(int n)
 	dump_form2(n);
 }
 
-trimstem(unsigned char * curs, int trimn)
+trimstem(char * curs, int trimn)
 {
 	int n;
-	unsigned char * s;
+	char * s;
 
 	if( trimn > 0 ) {
 		s = curs;
@@ -559,3 +559,6 @@ is_prevborth(char *s)
 
 	return(0);
 }
+
+int main(int argc, char **argv) { return yylex(); }
+int yywrap(void) { return 1; }
