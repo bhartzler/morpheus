@@ -11,7 +11,7 @@ GENEROBJ= genwd.o
 CC=cc
 CC=gcc
 #CFLAGS= -O -I${INCLUDE}   -g
-CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
+CFLAGS= -std=gnu89 -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-deprecated-non-prototype -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-return-type
 LINTFLAGS= -I${INCLUDE} -DDEBUG
 RM=/bin/rm
 CONJOBJ= conjmain.o conjsys.o combconj.o ppasstype.o
@@ -24,7 +24,7 @@ install: all
 	cp ${ALL} ../../bin
 
 ${GENERLIB}: ${GENEROBJ}
-	ar rv ${GENERLIB} ${GENEROBJ}
+	ar r ${GENERLIB} ${GENEROBJ}
 	ranlib ${GENERLIB}
 
 do_conj: ${CONJOBJ} ${ENDLIB} ${MORPHLIB} ${GREEKLIB} 

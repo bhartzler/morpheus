@@ -13,11 +13,11 @@ CC=cc
 CC=gcc
 #CFLAGS= -O -I${INCLUDE}   -g
 #CFLAGS= -O -I${INCLUDE}   -Wstrict-prototypes   -Wmissing-prototypes
-CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
+CFLAGS= -std=gnu89 -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-deprecated-non-prototype -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-return-type
 LINTFLAGS= -I${INCLUDE} -DDEBUG
 RM=/bin/rm -f
 
-LOADLIBES= -ll
+LOADLIBES=
 
 ALL=gkdict.a indexcomps indexnoms indexvbs  newlems newlems2 setquant splitlems splitlat latvb conj1 combitype latnom fixhesc fixgend
 
@@ -50,7 +50,7 @@ xx:	x.o  ${MORPHLIB} ${GREEKLIB}
 	${CC} -o xx x.o  ${MORPHLIB} ${GREEKLIB}
 
 ${DICTLIB}: ${DICTOBJ}
-	ar rv ${DICTLIB} ${DICTOBJ}
+	ar r ${DICTLIB} ${DICTOBJ} 2>/dev/null
 	ranlib ${DICTLIB}
 
 clean:

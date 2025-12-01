@@ -1,5 +1,5 @@
 INCLUDE=../includes
-CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
+CFLAGS= -std=gnu89 -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-deprecated-non-prototype -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-return-type
 LIB=greeklib.a
 RM=rm
 CC=cc
@@ -53,7 +53,7 @@ xstrings.o \
 zap2ndbreath.o 
 
 ${LIB}: ${GRKLIBOBJ}
-	ar rv ${LIB} ${GRKLIBOBJ}
+	ar r ${LIB} ${GRKLIBOBJ}
 	ranlib ${LIB}
 
 clean:

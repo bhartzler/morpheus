@@ -21,7 +21,7 @@ export MORPHLIB := $(CURDIR)/stemlib
 all: binaries greek latin
 
 binaries:
-	@echo "=== Building morpheus binaries ==="
+	@echo "=== Building Morpheus binaries ==="
 	@$(MAKE) -C $(SRCDIR) --silent
 
 greek:

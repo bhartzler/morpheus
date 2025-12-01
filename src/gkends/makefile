@@ -1,5 +1,5 @@
 INCLUDE=../includes
-CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
+CFLAGS= -std=gnu89 -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-deprecated-non-prototype -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-return-type
 RM=rm
 ENDLIB=gkends.a
 CC=cc
@@ -27,7 +27,7 @@ retrends.o \
 stor.o 
 
 ${ENDLIB}: ${ENDOBJ}
-	ar -rv ${ENDLIB} ${ENDOBJ}
+	ar r ${ENDLIB} ${ENDOBJ}
 	ranlib ${ENDLIB}
 
 ALL=buildword buildend indderivtables indendtables buildderiv ${ENDLIB}

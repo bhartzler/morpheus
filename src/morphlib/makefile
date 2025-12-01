@@ -1,5 +1,5 @@
 INCLUDE=../includes
-CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
+CFLAGS= -std=gnu89 -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-deprecated-non-prototype -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-return-type
 MORPHLIB=morphlib.a
 RM=rm
 CC=cc
@@ -44,7 +44,7 @@ ultform.o \
 ulttakescirc.o 
 
 ${MORPHLIB}: ${MORPHOBJ}
-	ar rv ${MORPHLIB} ${MORPHOBJ}
+	ar r ${MORPHLIB} ${MORPHOBJ}
 	ranlib ${MORPHLIB}
 
 betasort: betasort.o morphstrcmp.o gktoasc.o

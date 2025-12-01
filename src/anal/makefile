@@ -2,7 +2,7 @@
 LEXLIB = -lfl
 
 INCLUDE=../includes
-CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
+CFLAGS= -std=gnu89 -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-deprecated-non-prototype -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-return-type
 RM=rm
 CC=cc
 CC=gcc
@@ -34,7 +34,7 @@ prntanal.o \
 prvb.o 
 
 ${ANALLIB}: ${ANALOBJ}
-	ar rv ${ANALLIB} ${ANALOBJ}
+	ar r ${ANALLIB} ${ANALOBJ}
 	ranlib ${ANALLIB}
 
 ALL=cruncher pname findbase deverbal ${ANALLIB}
