@@ -27,7 +27,7 @@ retrends.o \
 stor.o 
 
 ${ENDLIB}: ${ENDOBJ}
-	ar r ${ENDLIB} ${ENDOBJ}
+	ar r ${ENDLIB} ${ENDOBJ} 2>/dev/null
 	ranlib ${ENDLIB}
 
 ALL=buildword buildend indderivtables indendtables buildderiv ${ENDLIB}
@@ -54,4 +54,4 @@ buildderiv: expsuffmain.o ${ENDOBJ} ${LIBS}
 	${CC} -o buildderiv expsuffmain.o ${ENDOBJ} ${LIBS}
 
 clean:
-	rm -f *.o
+	rm -f ${ALL} *.o

@@ -34,7 +34,7 @@ prntanal.o \
 prvb.o 
 
 ${ANALLIB}: ${ANALOBJ}
-	ar r ${ANALLIB} ${ANALOBJ}
+	ar r ${ANALLIB} ${ANALOBJ} 2>/dev/null
 	ranlib ${ANALLIB}
 
 ALL=cruncher pname findbase deverbal ${ANALLIB}
@@ -64,7 +64,7 @@ deverbal: deverb.o   ${ANALOBJ} ${LIBS}
 	${CC} -o deverbal deverb.o ${ANALOBJ} ${LIBS}
 
 clean:
-	rm -f cruncher *.o
+	rm -f ${ALL} *.o
 
 proclems: proclems.o
 	${CC} -o proclems proclems.o

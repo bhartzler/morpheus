@@ -44,14 +44,14 @@ ultform.o \
 ulttakescirc.o 
 
 ${MORPHLIB}: ${MORPHOBJ}
-	ar r ${MORPHLIB} ${MORPHOBJ}
+	ar r ${MORPHLIB} ${MORPHOBJ} 2>/dev/null
 	ranlib ${MORPHLIB}
 
 betasort: betasort.o morphstrcmp.o gktoasc.o
 	${CC} -o betasort betasort.o morphstrcmp.o  gktoasc.o
 
 clean:
-	rm -f *.o
+	rm -f ${MORPHLIB} *.o
 
 testkey: tmain.o ${MORPHLIB} ../greeklib/greeklib.a
 	${CC} -o testkey tmain.o  ${MORPHLIB} ../greeklib/greeklib.a

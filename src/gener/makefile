@@ -24,7 +24,7 @@ install: all
 	cp ${ALL} ../../bin
 
 ${GENERLIB}: ${GENEROBJ}
-	ar r ${GENERLIB} ${GENEROBJ}
+	ar r ${GENERLIB} ${GENEROBJ} 2>/dev/null
 	ranlib ${GENERLIB}
 
 do_conj: ${CONJOBJ} ${ENDLIB} ${MORPHLIB} ${GREEKLIB} 
@@ -40,5 +40,5 @@ gener: genermain.o gensynform.o  genwd.o genmisc.o  ${ENDLIB} ${MORPHLIB} ${GREE
 	${CC} -o gener genermain.o gensynform.o genwd.o genmisc.o  ${ENDLIB} ${MORPHLIB} ${GREEKLIB}
 
 clean:
-	rm -f *.o
+	rm -f ${ALL} *.o
 

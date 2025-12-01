@@ -53,11 +53,11 @@ xstrings.o \
 zap2ndbreath.o 
 
 ${LIB}: ${GRKLIBOBJ}
-	ar r ${LIB} ${GRKLIBOBJ}
+	ar r ${LIB} ${GRKLIBOBJ} 2>/dev/null
 	ranlib ${LIB}
 
 clean:
-	rm -f *.o
+	rm -f ${LIB} *.o
 
 
 iotest: io.o vaxwords.o

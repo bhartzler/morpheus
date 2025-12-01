@@ -19,7 +19,7 @@ Ystrncpy(char *s1, const char *s2, size_t len)
 	if( Xstrlen(s2) >= len ) {
 		char * p;
 		if( len  < 5 || len > BUFSIZ*4 ) {
-			fprintf(stderr,"Xstrncpy: hey! len %zu for [%s] \n", len, s2 );
+			/* fprintf(stderr,"Xstrncpy: hey! len %zu for [%s] \n", len, s2 ); */
 		}
 
 		
@@ -33,7 +33,7 @@ Ystrncpy(char *s1, const char *s2, size_t len)
 		*(p+len-1) = 0;
 		strcpy(s1,p);
 		xFree(p,"Xstrncpy buffer");
-		fprintf(stderr,"%d bytes into %zu:%s\n", Xstrlen(s2), len ,s2);
+		/* fprintf(stderr,"%d bytes into %zu:%s\n", Xstrlen(s2), len ,s2); */
 	} else
 		strcpy(s1,s2);
 }
@@ -44,13 +44,13 @@ Xstrncat(char *s1, const char *s2, size_t len)
 	size_t nlen;
 	
 	if( len  < 5 || len > BUFSIZ*4 ) {
-		fprintf(stderr,"Xstrncat: hey! len %zu for [%s] \n", len, s2 );
+		/* fprintf(stderr,"Xstrncat: hey! len %zu for [%s] \n", len, s2 ); */
 	}
 
 	if( Xstrlen(s1) + Xstrlen(s2) > len - 1 ) {
-		fprintf(stderr,"limit: %zu; tacking [%s] + [%s] is too big!\n", len , s1 , s2 );
+		/* fprintf(stderr,"limit: %zu; tacking [%s] + [%s] is too big!\n", len , s1 , s2 ); */
 		nlen = len - Xstrlen(s1) - 1;
-fprintf(stderr,"nlen %zu\n", nlen );
+		/* fprintf(stderr,"nlen %zu\n", nlen ); */
 		strncat(s1,s2,(size_t)nlen);
 		*(s1+len-1) = 0;
 	} else

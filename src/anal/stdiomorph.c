@@ -228,7 +228,7 @@ fprintf(stdout,"files: [%s] [%s]\n", outname, failedname);
 	
 	long_time = string_time;
 	strcpy(long_string,line);
-	fprintf(stderr,":longtime\t%.2f\t%s\n", long_time, long_string );
+	/* fprintf(stderr,":longtime\t%.2f\t%s\n", long_time, long_string ); */
       }
     }
     
