@@ -416,8 +416,8 @@ do_regnom(char*stem,char*key1,char*key2,char * key3)
 			strcpy(skeys,"gc_ggos fem");	
 
 		if(nsylls(stem) > 2 ) {
-			if(syllno = PENULT ) strcat(skeys," ant_acc"  );
 			checkaccent(stem,&syllno,&curacc);
+			if(syllno == PENULT ) strcat(skeys," ant_acc"  );
 		}
 		dump_nom(stem,2,skeys);
 		return(1);
@@ -439,8 +439,8 @@ do_regnom(char*stem,char*key1,char*key2,char * key3)
 			strcpy(skeys,"c_ktos fem");	
 
 		if(nsylls(stem) > 2 ) {
-			if(syllno = PENULT ) strcat(skeys," ant_acc"  );
 			checkaccent(stem,&syllno,&curacc);
+			if(syllno == PENULT ) strcat(skeys," ant_acc"  );
 		}
 		dump_nom(stem,(strcmp(stem+strlen(stem)-2,"ac")? 1 : 2),skeys);
 		return(1);
@@ -462,8 +462,8 @@ do_regnom(char*stem,char*key1,char*key2,char * key3)
 			strcpy(skeys,"c_gos fem");	
 
 		if(nsylls(stem) > 2 ) {
-			if(syllno = PENULT ) strcat(skeys," ant_acc"  );
 			checkaccent(stem,&syllno,&curacc);
+			if(syllno == PENULT ) strcat(skeys," ant_acc"  );
 		}
 		dump_nom(stem,1,skeys);
 		return(1);
