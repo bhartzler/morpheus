@@ -208,7 +208,7 @@ FILE *MorphFopen(char *, char *);
 #define DIRCHAR '/'
 
 #endif
-#define MAXANALYSES 25
+#define MAXANALYSES 50
 
 #define PROSEAUTHOR 0100
 #define LENGTH_OF(X) (sizeof X/sizeof X[0])
