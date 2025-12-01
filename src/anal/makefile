@@ -2,7 +2,7 @@
 LEXLIB = -lfl
 
 INCLUDE=../includes
-CFLAGS= -O2 -I${INCLUDE} -fcommon  -Wno-implicit-int   -Wno-implicit-function-declaration
+CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
 RM=rm
 CC=cc
 CC=gcc

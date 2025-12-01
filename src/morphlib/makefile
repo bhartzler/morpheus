@@ -1,5 +1,5 @@
 INCLUDE=../includes
-CFLAGS= -O2   -I${INCLUDE}   -Wno-implicit-int   -Wno-implicit-function-declaration
+CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
 MORPHLIB=morphlib.a
 RM=rm
 CC=cc

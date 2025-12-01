@@ -246,8 +246,6 @@ fprintf(stdout,"files: [%s] [%s]\n", outname, failedname);
     if(! ( nwords % 1000) ) {
       if( timeit ) {
 	avg_time = (double)(end_time - start_time)/(CLOCKS_PER_SEC * (double)nwords) ;
-	
-	fprintf(stderr,":time %.2f %.2f\n", avg_time , string_time );
       }
       fprintf(stderr,"%ld %ld %0.2f %s %d\n", nwords , nhits, 100* ((float)nhits/(float)nwords) , line , rval  );
     }
@@ -272,9 +270,10 @@ fprintf(stdout,"files: [%s] [%s]\n", outname, failedname);
   }		
 
     if( timeit ) {
-      fprintf(fstats,":avg time %.2f; long time [%.2f] for [%s]\n", avg_time , long_time, long_string );
-      fprintf(stderr,":avg time %.2f; long time [%.2f] for [%s]\n", avg_time , long_time, long_string );
-     }
+      double total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+      fprintf(fstats,"TIME: %.2f seconds\n", total_time);
+      fprintf(stderr,"TIME: %.2f seconds\n", total_time);
+    }
   
   fclose(fstats);
   exit(0);

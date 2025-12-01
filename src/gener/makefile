@@ -11,7 +11,7 @@ GENEROBJ= genwd.o
 CC=cc
 CC=gcc
 #CFLAGS= -O -I${INCLUDE}   -g
-CFLAGS= -O2 -I${INCLUDE} -fcommon  -Wno-implicit-int   -Wno-implicit-function-declaration
+CFLAGS= -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration
 LINTFLAGS= -I${INCLUDE} -DDEBUG
 RM=/bin/rm
 CONJOBJ= conjmain.o conjsys.o combconj.o ppasstype.o
