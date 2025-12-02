@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #define LOCBUF 256
 
 #include "endsinstr.proto.h"

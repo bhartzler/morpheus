@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 int quickflag = 0;
 
 main(argc,argv)

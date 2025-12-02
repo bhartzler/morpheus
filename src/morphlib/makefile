@@ -1,9 +1,16 @@
 INCLUDE=../includes
-CFLAGS= -std=gnu89 -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon -Wno-deprecated-non-prototype -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-return-type
 MORPHLIB=morphlib.a
 RM=rm
 CC=cc
-CC=gcc
+
+# Compiler-specific warning flags
+ifeq ($(shell $(CC) --version 2>&1 | grep -c clang),1)
+    WARN_FLAGS = -Wno-deprecated-non-prototype
+else
+    WARN_FLAGS = -Wno-stringop-overflow -Wno-format-overflow -Wno-unused-result
+endif
+
+CFLAGS= -std=gnu89 -O3 -march=native -funroll-loops -I${INCLUDE} -fcommon $(WARN_FLAGS) -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-return-type
 
 MORPHOBJ= adddomain.o \
 addninfix.o \
