@@ -54,8 +54,8 @@ MorphPathName(char *shorts, char *full)
 	s = getenv("MORPHLIB");
 
 	if( ! s ) {
-		printf("MORPHLIB not set in your environment!\n");
-		return(0);
+		fprintf(stderr, "MORPHLIB not set in your environment!\n");
+		exit(1);
 	}
 	
 	if( cur_lang() == LATIN ) 
