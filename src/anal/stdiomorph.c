@@ -271,8 +271,10 @@ fprintf(stdout,"files: [%s] [%s]\n", outname, failedname);
 
     if( timeit ) {
       double total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-      fprintf(fstats,"TIME: %.2f seconds\n", total_time);
-      fprintf(stderr,"TIME: %.2f seconds\n", total_time);
+      int minutes = (int)(total_time / 60);
+      int seconds = (int)(total_time) % 60;
+      fprintf(fstats,"TIME: %dm %ds\n", minutes, seconds);
+      fprintf(stderr,"TIME: %dm %ds\n", minutes, seconds);
     }
   
   fclose(fstats);
