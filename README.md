@@ -1,26 +1,40 @@
-morpheus
-========
+# Morpheus
 
-Morpheus parser code.
+Morphological analyzer for Ancient Greek and Latin.
 
-Compiling and installing morpheus
----------------------------------
+## About This Fork
 
-By default morpheus installs into bin/
+Fork of [Alatius/morpheus](https://github.com/Alatius/morpheus) that builds on
+macOS. Fixes some analysis bugs that improve Greek parsing by about 5%
+(140k more words parse) and corrects POS tagging for indeclinable forms.
+
+## Building
+
+```bash
+make              # Build everything
+make test         # Verify it works
 ```
-  cd src
-  make
-  make install
+
+## Usage
+
+```bash
+# Greek (Beta code)
+echo "lo/gos" | MORPHLIB=stemlib bin/cruncher
+
+# Latin
+echo "amo" | MORPHLIB=stemlib bin/cruncher -L
 ```
-Compiling a stem library
-------------------------
+
+## Rebuilding Stemlib
+
+To rebuild just the stem library (after modifying stemlib source files):
+
+```bash
+cd stemlib/Greek
+export PATH=$PATH:../../bin
+MORPHLIB=.. make
 ```
-  cd stemlib/Latin
-  export PATH=$PATH:../../bin
-  MORPHLIB=.. make
-```
-Running the cruncher
---------------------
-```
-MORPHLIB=stemlib bin/cruncher < wordlist > crunched
-```
+
+## Lineage
+
+PerseusDL → nickjwhite → Alatius → this fork
